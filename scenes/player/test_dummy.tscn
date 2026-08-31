@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/test_dummy.gd" id="1_dummy"]
+[ext_resource type="Script" path="res://scripts/systems/health_component.gd" id="2_health"]
+[ext_resource type="Script" path="res://scripts/systems/hurtbox.gd" id="3_hurt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(60, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(70, 150)
+
+[node name="CombatDummy" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 0
+script = ExtResource("1_dummy")
+
+[node name="Body" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_body")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-30, -75, 30, -75, 30, 75, -30, 75)
+color = Color(0.55, 0.5, 0.4, 1)
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_hurt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("2_health")
+max_health = 5

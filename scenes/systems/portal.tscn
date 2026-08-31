@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/stage_exit.gd" id="1_exit"]
+[ext_resource type="Script" path="res://scripts/systems/portal_visual.gd" id="2_visual"]
+
+[sub_resource type="RectangleShape2D" id="Rect_exit"]
+size = Vector2(90, 1300)
+
+[node name="Portal" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_exit")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Rect_exit")
+
+[node name="Visual" type="Node2D" parent="."]
+position = Vector2(0, -160)
+script = ExtResource("2_visual")

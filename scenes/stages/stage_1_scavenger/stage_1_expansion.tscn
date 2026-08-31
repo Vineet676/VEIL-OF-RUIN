@@ -1,0 +1,207 @@
+[gd_scene load_steps=11 format=3]
+
+[ext_resource type="PackedScene" path="res://scenes/systems/health_pickup.tscn" id="1_pickup"]
+[ext_resource type="PackedScene" path="res://scenes/systems/safe_landing.tscn" id="2_safe"]
+[ext_resource type="PackedScene" path="res://scenes/systems/checkpoint.tscn" id="3_cp"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_1/_build/terrain/platform.png" id="plat"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_1/_build/terrain/wall.png" id="wall"]
+
+[sub_resource type="RectangleShape2D" id="R_wall_shaft_l"]
+size = Vector2(40, 400)
+[sub_resource type="RectangleShape2D" id="R_wall_shaft_r"]
+size = Vector2(40, 400)
+[sub_resource type="RectangleShape2D" id="R_up0"]
+size = Vector2(180, 24)
+[sub_resource type="RectangleShape2D" id="R_up1"]
+size = Vector2(180, 24)
+[sub_resource type="RectangleShape2D" id="R_up2"]
+size = Vector2(180, 24)
+[sub_resource type="RectangleShape2D" id="R_up3"]
+size = Vector2(180, 24)
+[sub_resource type="RectangleShape2D" id="R_up_top"]
+size = Vector2(220, 24)
+[sub_resource type="RectangleShape2D" id="R_sec_approach"]
+size = Vector2(120, 24)
+[sub_resource type="RectangleShape2D" id="R_sec_top_l"]
+size = Vector2(80, 24)
+[sub_resource type="RectangleShape2D" id="R_sec_top_r"]
+size = Vector2(80, 24)
+[sub_resource type="RectangleShape2D" id="R_sec_wall_l"]
+size = Vector2(20, 260)
+[sub_resource type="RectangleShape2D" id="R_sec_wall_r"]
+size = Vector2(20, 260)
+[sub_resource type="RectangleShape2D" id="R_chamber_floor"]
+size = Vector2(100, 24)
+
+[node name="Expansion" type="Node2D"]
+
+[node name="ShaftWallL" type="StaticBody2D" parent="."]
+position = Vector2(120, 420)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShaftWallL"]
+shape = SubResource("R_wall_shaft_l")
+
+[node name="Vis" type="Sprite2D" parent="ShaftWallL"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(1.0, 0.5263157894736842)
+texture_filter = 1
+texture = ExtResource("wall")
+[node name="ShaftWallR" type="StaticBody2D" parent="."]
+position = Vector2(300, 420)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShaftWallR"]
+shape = SubResource("R_wall_shaft_r")
+
+[node name="Vis" type="Sprite2D" parent="ShaftWallR"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(1.0, 0.5263157894736842)
+texture_filter = 1
+texture = ExtResource("wall")
+[node name="Up0" type="StaticBody2D" parent="."]
+position = Vector2(160, 520)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Up0"]
+shape = SubResource("R_up0")
+
+[node name="Vis" type="Sprite2D" parent="Up0"]
+centered = false
+position = Vector2(-90.0, -12)
+scale = Vector2(0.703125, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Up1" type="StaticBody2D" parent="."]
+position = Vector2(300, 430)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Up1"]
+shape = SubResource("R_up1")
+
+[node name="Vis" type="Sprite2D" parent="Up1"]
+centered = false
+position = Vector2(-90.0, -12)
+scale = Vector2(0.703125, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Up2" type="StaticBody2D" parent="."]
+position = Vector2(160, 340)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Up2"]
+shape = SubResource("R_up2")
+
+[node name="Vis" type="Sprite2D" parent="Up2"]
+centered = false
+position = Vector2(-90.0, -12)
+scale = Vector2(0.703125, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Up3" type="StaticBody2D" parent="."]
+position = Vector2(300, 250)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Up3"]
+shape = SubResource("R_up3")
+
+[node name="Vis" type="Sprite2D" parent="Up3"]
+centered = false
+position = Vector2(-90.0, -12)
+scale = Vector2(0.703125, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="UpTop" type="StaticBody2D" parent="."]
+position = Vector2(200, 160)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpTop"]
+shape = SubResource("R_up_top")
+
+[node name="Vis" type="Sprite2D" parent="UpTop"]
+centered = false
+position = Vector2(-110.0, -12)
+scale = Vector2(0.859375, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Reward1" parent="." instance=ExtResource("1_pickup")]
+position = Vector2(200, 70)
+
+[node name="SecApproach" type="StaticBody2D" parent="."]
+position = Vector2(1700, 420)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecApproach"]
+shape = SubResource("R_sec_approach")
+
+[node name="Vis" type="Sprite2D" parent="SecApproach"]
+centered = false
+position = Vector2(-60.0, -12)
+scale = Vector2(0.46875, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="SecTopL" type="StaticBody2D" parent="."]
+position = Vector2(1400, 380)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecTopL"]
+shape = SubResource("R_sec_top_l")
+
+[node name="Vis" type="Sprite2D" parent="SecTopL"]
+centered = false
+position = Vector2(-40.0, -12)
+scale = Vector2(0.3125, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+modulate = Color(0.7, 0.5, 1.0, 0.9)
+[node name="SecTopR" type="StaticBody2D" parent="."]
+position = Vector2(1560, 380)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecTopR"]
+shape = SubResource("R_sec_top_r")
+
+[node name="Vis" type="Sprite2D" parent="SecTopR"]
+centered = false
+position = Vector2(-40.0, -12)
+scale = Vector2(0.3125, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+modulate = Color(0.7, 0.5, 1.0, 0.9)
+[node name="SecShaftWallL" type="StaticBody2D" parent="."]
+position = Vector2(1440, 520)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecShaftWallL"]
+shape = SubResource("R_sec_wall_l")
+
+[node name="Vis" type="Sprite2D" parent="SecShaftWallL"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(0.5, 0.34210526315789475)
+texture_filter = 1
+texture = ExtResource("wall")
+[node name="SecShaftWallR" type="StaticBody2D" parent="."]
+position = Vector2(1540, 520)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecShaftWallR"]
+shape = SubResource("R_sec_wall_r")
+
+[node name="Vis" type="Sprite2D" parent="SecShaftWallR"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(0.5, 0.34210526315789475)
+texture_filter = 1
+texture = ExtResource("wall")
+[node name="ChamberFloor" type="StaticBody2D" parent="."]
+position = Vector2(1480, 700)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChamberFloor"]
+shape = SubResource("R_chamber_floor")
+
+[node name="Vis" type="Sprite2D" parent="ChamberFloor"]
+centered = false
+position = Vector2(-50.0, -12)
+scale = Vector2(0.390625, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+modulate = Color(0.7, 0.5, 1.0, 0.9)
+[node name="SafeLanding" parent="." instance=ExtResource("2_safe")]
+position = Vector2(1480, 690)
+
+[node name="Reward2" parent="." instance=ExtResource("1_pickup")]
+position = Vector2(1480, 610)
+
+[node name="Checkpoint3" parent="." instance=ExtResource("3_cp")]
+position = Vector2(1480, 650)

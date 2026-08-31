@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/checkpoint.gd" id="1_cp"]
+[ext_resource type="SpriteFrames" path="res://scenes/systems/checkpoint_animations.tres" id="2_sf"]
+[ext_resource type="Texture2D" path="res://assets/checkpoints/checkpoint_light/light_cone.png" id="3_light"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_area"]
+size = Vector2(110, 150)
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("1_cp")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -64)
+sprite_frames = ExtResource("2_sf")
+animation = &"idle"
+
+[node name="LightCone" type="Sprite2D" parent="."]
+position = Vector2(0, -120)
+texture = ExtResource("3_light")
+modulate = Color(1, 1, 1, 0.35)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -70)
+shape = SubResource("RectangleShape2D_area")

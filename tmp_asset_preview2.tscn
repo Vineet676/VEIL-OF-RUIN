@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/stage_2/background/background_layers.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_2/midground/midground_layers.png" id="2"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_2/foreground/foreground_props.png" id="3"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_2/tiles/citadel_tileset.png" id="4"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_2/platforms/citadel_platforms.png" id="5"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_2/obstacles/citadel_hazards.png" id="6"]
+
+[node name="Preview" type="Node2D"]
+
+[node name="bg" type="Sprite2D" parent="."]
+position = Vector2(640, 200)
+texture = ExtResource("1")
+
+[node name="mg" type="Sprite2D" parent="."]
+position = Vector2(640, 500)
+texture = ExtResource("2")
+
+[node name="fg" type="Sprite2D" parent="."]
+position = Vector2(640, 760)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("3")
+
+[node name="tileset" type="Sprite2D" parent="."]
+position = Vector2(640, 1000)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4")
+
+[node name="platforms" type="Sprite2D" parent="."]
+position = Vector2(640, 1230)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5")
+
+[node name="hazards" type="Sprite2D" parent="."]
+position = Vector2(640, 1430)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("6")
+
+[node name="Cam" type="Camera2D" parent="."]
+position = Vector2(640, 700)

@@ -1,0 +1,350 @@
+[gd_scene load_steps=37]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/guard/guard.tscn" id="2_guard"]
+[ext_resource type="PackedScene" path="res://scenes/systems/checkpoint.tscn" id="3_checkpoint"]
+[ext_resource type="PackedScene" path="res://scenes/systems/hazard.tscn" id="4_hazard"]
+[ext_resource type="Script" path="res://scripts/systems/portal_visual.gd" id="9_portalvis"]
+[ext_resource type="Script" path="res://scripts/systems/stage_exit.gd" id="5_exit"]
+[ext_resource type="PackedScene" path="res://scenes/npc/npc_hermit.tscn" id="6_npc"]
+[ext_resource type="PackedScene" path="res://scenes/systems/dialogue_manager.tscn" id="7_dm"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/beast/beast.tscn" id="8_beast"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/cultist/cultist.tscn" id="9_cultist"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/new_enemy/new_enemy.tscn" id="10_new"]
+[ext_resource type="Script" path="res://scripts/systems/kill_zone.gd" id="11_kz"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_3/_build/terrain/floor_ground.png" id="floor"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_3/_build/terrain/wall.png" id="wall"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_3/_build/terrain/platform.png" id="plat"]
+[ext_resource type="Texture2D" path="res://assets/environments/backgrounds/stage_3/far.png" id="far"]
+[ext_resource type="Texture2D" path="res://assets/environments/backgrounds/stage_3/mid.png" id="mid"]
+[ext_resource type="Texture2D" path="res://assets/environments/backgrounds/stage_3/foreground.png" id="foreground"]
+[ext_resource type="Texture2D" path="res://assets/environments/backgrounds/stage_3/fog.png" id="fog"]
+[sub_resource type="RectangleShape2D" id="Rect_wall"]
+size = Vector2(40, 760)
+[sub_resource type="RectangleShape2D" id="Rect_exit"]
+size = Vector2(90, 1300)
+[sub_resource type="RectangleShape2D" id="Rect_kz"]
+size = Vector2(4000, 160)
+[sub_resource type="RectangleShape2D" id="Rect_floor0"]
+size = Vector2(900.000000, 120)
+[sub_resource type="RectangleShape2D" id="Rect_floor1"]
+size = Vector2(800.000000, 120)
+[sub_resource type="RectangleShape2D" id="Rect_floor2"]
+size = Vector2(850.000000, 120)
+[sub_resource type="RectangleShape2D" id="Rect_floor3"]
+size = Vector2(950.000000, 120)
+[sub_resource type="RectangleShape2D" id="Rect_plat0"]
+size = Vector2(240.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat1"]
+size = Vector2(260.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat2"]
+size = Vector2(240.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat3"]
+size = Vector2(280.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat4"]
+size = Vector2(240.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat5"]
+size = Vector2(260.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat6"]
+size = Vector2(240.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat7"]
+size = Vector2(280.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat8"]
+size = Vector2(280.000000, 24)
+[sub_resource type="RectangleShape2D" id="Rect_plat9"]
+size = Vector2(240.000000, 24)
+[node name="Stage3Collapse" type="Node2D"]
+[node name="Backdrop" type="ColorRect" parent="."]
+offset_right = 4000.000000
+offset_bottom = 720.0
+color = Color(0.03, 0.05, 0.08, 1)
+[node name="far" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.080000, 1)
+repeat_size = Vector2(1610, 0)
+[node name="Spr" type="Sprite2D" parent="far"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(1.5, 1.5)
+modulate = Color(1, 1, 1, 1.00)
+texture_filter = 1
+texture = ExtResource("far")
+[node name="mid" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.220000, 1)
+repeat_size = Vector2(1610, 0)
+[node name="Spr" type="Sprite2D" parent="mid"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(1.5, 1.5)
+modulate = Color(1, 1, 1, 0.22)
+texture_filter = 1
+texture = ExtResource("mid")
+[node name="foreground" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.400000, 1)
+repeat_size = Vector2(1610, 0)
+[node name="Spr" type="Sprite2D" parent="foreground"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(1.5, 1.5)
+modulate = Color(1, 1, 1, 0.20)
+texture_filter = 1
+texture = ExtResource("foreground")
+[node name="fog" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.700000, 1)
+repeat_size = Vector2(1610, 0)
+[node name="Spr" type="Sprite2D" parent="fog"]
+centered = false
+position = Vector2(0, 0)
+scale = Vector2(1.5, 1.5)
+modulate = Color(1, 1, 1, 0.26)
+texture_filter = 1
+texture = ExtResource("fog")
+[node name="Exit" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+position = Vector2(3930, 650)
+script = ExtResource("5_exit")
+next_stage = &"stage_4"
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Exit"]
+position = Vector2(0, 0)
+shape = SubResource("Rect_exit")
+[node name="Visual" type="Node2D" parent="Exit"]
+position = Vector2(0, -160)
+script = ExtResource("9_portalvis")
+[node name="Floor0" type="StaticBody2D" parent="."]
+position = Vector2(450.000000, 700)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor0"]
+shape = SubResource("Rect_floor0")
+[node name="Ground" type="Sprite2D" parent="Floor0"]
+centered = false
+position = Vector2(-450.000000, -60)
+scale = Vector2(0.351563, 1)
+texture_filter = 1
+texture = ExtResource("floor")
+[node name="Floor1" type="StaticBody2D" parent="."]
+position = Vector2(1500.000000, 700)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor1"]
+shape = SubResource("Rect_floor1")
+[node name="Ground" type="Sprite2D" parent="Floor1"]
+centered = false
+position = Vector2(-400.000000, -60)
+scale = Vector2(0.312500, 1)
+texture_filter = 1
+texture = ExtResource("floor")
+[node name="Floor2" type="StaticBody2D" parent="."]
+position = Vector2(2475.000000, 700)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2"]
+shape = SubResource("Rect_floor2")
+[node name="Ground" type="Sprite2D" parent="Floor2"]
+centered = false
+position = Vector2(-425.000000, -60)
+scale = Vector2(0.332031, 1)
+texture_filter = 1
+texture = ExtResource("floor")
+[node name="Floor3" type="StaticBody2D" parent="."]
+position = Vector2(3525.000000, 700)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3"]
+shape = SubResource("Rect_floor3")
+[node name="Ground" type="Sprite2D" parent="Floor3"]
+centered = false
+position = Vector2(-475.000000, -60)
+scale = Vector2(0.371094, 1)
+texture_filter = 1
+texture = ExtResource("floor")
+[node name="WallLeft" type="StaticBody2D" parent="."]
+position = Vector2(-20, 0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallLeft"]
+shape = SubResource("Rect_wall")
+[node name="Vis" type="Sprite2D" parent="WallLeft"]
+centered = false
+position = Vector2(0, 0)
+texture_filter = 1
+texture = ExtResource("wall")
+[node name="WallRight" type="StaticBody2D" parent="."]
+position = Vector2(4020, 0)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallRight"]
+shape = SubResource("Rect_wall")
+[node name="Vis" type="Sprite2D" parent="WallRight"]
+centered = false
+position = Vector2(0, 0)
+texture_filter = 1
+texture = ExtResource("wall")
+[node name="Platform0" type="StaticBody2D" parent="."]
+position = Vector2(450.000000, 532.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform0"]
+shape = SubResource("Rect_plat0")
+[node name="Vis" type="Sprite2D" parent="Platform0"]
+centered = false
+position = Vector2(-120.000000, -12)
+scale = Vector2(0.937500, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(720.000000, 412.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("Rect_plat1")
+[node name="Vis" type="Sprite2D" parent="Platform1"]
+centered = false
+position = Vector2(-130.000000, -12)
+scale = Vector2(1.015625, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(1500.000000, 532.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("Rect_plat2")
+[node name="Vis" type="Sprite2D" parent="Platform2"]
+centered = false
+position = Vector2(-120.000000, -12)
+scale = Vector2(0.937500, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(1750.000000, 412.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+shape = SubResource("Rect_plat3")
+[node name="Vis" type="Sprite2D" parent="Platform3"]
+centered = false
+position = Vector2(-140.000000, -12)
+scale = Vector2(1.093750, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(2300.000000, 532.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+shape = SubResource("Rect_plat4")
+[node name="Vis" type="Sprite2D" parent="Platform4"]
+centered = false
+position = Vector2(-120.000000, -12)
+scale = Vector2(0.937500, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform5" type="StaticBody2D" parent="."]
+position = Vector2(2550.000000, 412.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
+shape = SubResource("Rect_plat5")
+[node name="Vis" type="Sprite2D" parent="Platform5"]
+centered = false
+position = Vector2(-130.000000, -12)
+scale = Vector2(1.015625, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform6" type="StaticBody2D" parent="."]
+position = Vector2(3200.000000, 532.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
+shape = SubResource("Rect_plat6")
+[node name="Vis" type="Sprite2D" parent="Platform6"]
+centered = false
+position = Vector2(-120.000000, -12)
+scale = Vector2(0.937500, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform7" type="StaticBody2D" parent="."]
+position = Vector2(3500.000000, 412.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform7"]
+shape = SubResource("Rect_plat7")
+[node name="Vis" type="Sprite2D" parent="Platform7"]
+centered = false
+position = Vector2(-140.000000, -12)
+scale = Vector2(1.093750, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform8" type="StaticBody2D" parent="."]
+position = Vector2(3780.000000, 312.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform8"]
+shape = SubResource("Rect_plat8")
+[node name="Vis" type="Sprite2D" parent="Platform8"]
+centered = false
+position = Vector2(-140.000000, -12)
+scale = Vector2(1.093750, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="Platform9" type="StaticBody2D" parent="."]
+position = Vector2(3850.000000, 192.000000)
+collision_mask = 2
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform9"]
+shape = SubResource("Rect_plat9")
+[node name="Vis" type="Sprite2D" parent="Platform9"]
+centered = false
+position = Vector2(-120.000000, -12)
+scale = Vector2(0.937500, 1)
+texture_filter = 1
+texture = ExtResource("plat")
+[node name="KillZone" type="Area2D" parent="."]
+position = Vector2(2000, 860)
+script = ExtResource("11_kz")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone"]
+shape = SubResource("Rect_kz")
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(180, 552)
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = 0
+limit_top = 0
+limit_right = 4000
+limit_bottom = 720
+[node name="Checkpoint1" parent="." instance=ExtResource("3_checkpoint")]
+position = Vector2(1150.000000, 552.000000)
+[node name="Checkpoint2" parent="." instance=ExtResource("3_checkpoint")]
+position = Vector2(2100.000000, 552.000000)
+[node name="Checkpoint3" parent="." instance=ExtResource("3_checkpoint")]
+position = Vector2(3100.000000, 552.000000)
+[node name="Hermit" parent="." instance=ExtResource("6_npc")]
+position = Vector2(300.000000, 580.000000)
+[node name="DialogueManager" parent="." instance=ExtResource("7_dm")]
+[node name="Enemy1" parent="." instance=ExtResource("2_guard")]
+position = Vector2(460.000000, 480.000000)
+patrol_left = 320
+patrol_right = 650
+[node name="Enemy2" parent="." instance=ExtResource("10_new")]
+position = Vector2(720.000000, 290.000000)
+patrol_left = 580
+patrol_right = 900
+[node name="Enemy3" parent="." instance=ExtResource("8_beast")]
+position = Vector2(1500.000000, 480.000000)
+patrol_left = 1300
+patrol_right = 1850
+[node name="Enemy4" parent="." instance=ExtResource("9_cultist")]
+position = Vector2(1750.000000, 290.000000)
+patrol_left = 1500
+patrol_right = 2000
+[node name="Enemy5" parent="." instance=ExtResource("2_guard")]
+position = Vector2(2300.000000, 480.000000)
+patrol_left = 2100
+patrol_right = 2650
+[node name="Enemy6" parent="." instance=ExtResource("10_new")]
+position = Vector2(2550.000000, 290.000000)
+patrol_left = 2350
+patrol_right = 2750
+[node name="Enemy7" parent="." instance=ExtResource("8_beast")]
+position = Vector2(3200.000000, 480.000000)
+patrol_left = 3000
+patrol_right = 3600
+[node name="Enemy8" parent="." instance=ExtResource("9_cultist")]
+position = Vector2(3500.000000, 290.000000)
+patrol_left = 3300
+patrol_right = 3700
+[node name="Enemy9" parent="." instance=ExtResource("2_guard")]
+position = Vector2(3800.000000, 170.000000)
+patrol_left = 3600
+patrol_right = 3980
+[node name="Hazard1" parent="." instance=ExtResource("4_hazard")]
+position = Vector2(950.000000, 610.000000)
+[node name="Hazard2" parent="." instance=ExtResource("4_hazard")]
+position = Vector2(2000.000000, 610.000000)
+[node name="Hazard3" parent="." instance=ExtResource("4_hazard")]
+position = Vector2(2950.000000, 610.000000)
+[node name="Hazard4" parent="." instance=ExtResource("4_hazard")]
+position = Vector2(180.000000, 610.000000)

@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://uln81smhgm5o"]
+
+[ext_resource type="Script" uid="uid://dhei8jmktymik" path="res://scripts/enemies/new_enemy.gd" id="1_new"]
+[ext_resource type="Script" uid="uid://csyu10a7wa86s" path="res://scripts/systems/health_component.gd" id="2_health"]
+[ext_resource type="Script" uid="uid://68wsfkxgm5sg" path="res://scripts/systems/hurtbox.gd" id="3_hurtbox"]
+[ext_resource type="Script" uid="uid://bmtwjqvcod0w5" path="res://scripts/systems/hitbox.gd" id="4_hitbox"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_health_bar.tscn" id="5_bar"]
+[ext_resource type="Script" uid="uid://886lf3rjyha" path="res://scripts/enemies/enemy_health_bar.gd" id="22_sb735"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aa3cj"]
+animations = [
+{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": true,
+"name": &"walk",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"hurt",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"die",
+"speed": 8.0
+}
+]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(44, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(48, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_attack"]
+size = Vector2(72, 56)
+
+[node name="NewEnemy" type="CharacterBody2D" unique_id=1806371759]
+collision_mask = 3
+script = ExtResource("1_new")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=886835686]
+visible = false
+position = Vector2(0, 60)
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_aa3cj")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1696901340]
+position = Vector2(0, 112)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=258511138]
+script = ExtResource("2_health")
+max_health = 34
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=551597179]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("3_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=229092163]
+position = Vector2(0, 110)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=2046737414]
+position = Vector2(60, 100)
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("4_hitbox")
+base_damage = 12
+knockback_force = 320.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1330552138]
+shape = SubResource("RectangleShape2D_attack")
+
+[node name="EnemyHealthBar" type="Node2D" parent="." unique_id=1743320098 instance=ExtResource("5_bar")]
+position = Vector2(0, -30)
+script = ExtResource("22_sb735")

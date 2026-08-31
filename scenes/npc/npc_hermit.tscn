@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/npc/npc.gd" id="1_npc"]
+
+[sub_resource type="CircleShape2D" id="Circle_interact"]
+radius = 18.0
+
+[node name="NPC" type="Area2D"]
+script = ExtResource("1_npc")
+dialogue_lines = [{
+"speaker": "The Hermit",
+"text": "The Crown was never meant to be worn. It binds what it touches... and what it touches, it hollows."
+}, {
+"speaker": "The Hermit",
+"text": "If you must reach it, know this: every path here is sealed until you earn the means to open it."
+}, {
+"speaker": "The Hermit",
+"text": "Press on, ashen one. The gate ahead will not move for empty hands."
+}]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Circle_interact")

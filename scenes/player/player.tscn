@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=3 uid="uid://2umlmkw4ony3"]
+
+[ext_resource type="Script" uid="uid://cs8ol0w1iv70v" path="res://scripts/player/player_controller.gd" id="1_scr"]
+[ext_resource type="Script" uid="uid://csyu10a7wa86s" path="res://scripts/systems/health_component.gd" id="2_health"]
+[ext_resource type="Script" uid="uid://68wsfkxgm5sg" path="res://scripts/systems/hurtbox.gd" id="3_hurtbox"]
+[ext_resource type="Script" uid="uid://bmtwjqvcod0w5" path="res://scripts/systems/hitbox.gd" id="4_hitbox"]
+[ext_resource type="SpriteFrames" path="res://scenes/player/player_animations.tres" id="5_sf"]
+[ext_resource type="PackedScene" path="res://scenes/ui/player_hud.tscn" id="6_hud"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 20.0
+height = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(44, 132)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_attack"]
+size = Vector2(80, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interact"]
+size = Vector2(180, 200)
+
+[node name="Player" type="CharacterBody2D" unique_id=1370533679]
+collision_layer = 2
+scale = Vector2(0.55, 0.55)
+script = ExtResource("1_scr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1254121637]
+visible = false
+sprite_frames = ExtResource("5_sf")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=129101634]
+position = Vector2(0, 100)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=492620134]
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1315211647]
+script = ExtResource("2_health")
+invulnerability_time = 0.8
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1770640885]
+collision_layer = 16
+collision_mask = 8
+script = ExtResource("3_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" unique_id=1926036757]
+position = Vector2(0, 100)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=2056825081]
+position = Vector2(55, 85)
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("4_hitbox")
+knockback_force = 260.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=347925388]
+shape = SubResource("RectangleShape2D_attack")
+
+[node name="WallCheckLeft" type="RayCast2D" parent="." unique_id=1273615164]
+position = Vector2(0, 80)
+target_position = Vector2(-55, 0)
+
+[node name="WallCheckRight" type="RayCast2D" parent="." unique_id=1124619926]
+position = Vector2(0, 80)
+target_position = Vector2(55, 0)
+
+[node name="InteractArea" type="Area2D" parent="." unique_id=1309934892]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea" unique_id=1115798026]
+position = Vector2(0, 110)
+shape = SubResource("RectangleShape2D_interact")
+
+[node name="InteractPrompt" type="Label" parent="." unique_id=2137305825]
+visible = false
+offset_left = -40.0
+offset_top = -190.0
+offset_right = 40.0
+offset_bottom = -160.0
+text = "E"
+horizontal_alignment = 1
+
+[node name="PlayerHud" parent="." instance=ExtResource("6_hud")]

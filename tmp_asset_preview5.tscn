@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/environments/stage_1/_build/plat_grid.png" id="1"]
+[ext_resource type="Texture2D" path="res://assets/environments/stage_1/_build/swamp_plat_grid.png" id="2"]
+
+[node name="Preview" type="Node2D"]
+
+[node name="pa" type="Sprite2D" parent="."]
+position = Vector2(1200, 700)
+scale = Vector2(4, 4)
+texture = ExtResource("1")
+
+[node name="sp" type="Sprite2D" parent="."]
+position = Vector2(2600, 900)
+scale = Vector2(4, 4)
+texture = ExtResource("2")
+
+[node name="Cam" type="Camera2D" parent="."]
+position = Vector2(1800, 800)

@@ -1,0 +1,83 @@
+[gd_resource type="SpriteFrames" load_steps=1 format=3]
+
+[resource]
+animations = [
+{
+"frames": [],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"jump",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"fall",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": true,
+"name": &"wall_slide",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"wall_jump",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"dash",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"attack",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"parry",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"slide",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"special",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"hurt",
+"speed": 8.0
+},
+{
+"frames": [],
+"loop": false,
+"name": &"dead",
+"speed": 8.0
+}
+]

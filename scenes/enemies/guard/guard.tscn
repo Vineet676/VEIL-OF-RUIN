@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://scripts/enemies/guard.gd" id="1_guard"]
+[ext_resource type="SpriteFrames" path="res://scenes/enemies/guard/guard_animations.tres" id="2_sf"]
+[ext_resource type="Script" path="res://scripts/systems/health_component.gd" id="3_health"]
+[ext_resource type="Script" path="res://scripts/systems/hurtbox.gd" id="4_hurtbox"]
+[ext_resource type="Script" path="res://scripts/systems/hitbox.gd" id="5_hitbox"]
+[ext_resource type="PackedScene" path="res://scenes/enemies/enemy_health_bar.tscn" id="6_bar"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_body"]
+size = Vector2(42, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hurt"]
+size = Vector2(46, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_attack"]
+size = Vector2(70, 52)
+
+[node name="Guard" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 3
+script = ExtResource("1_guard")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, 80)
+sprite_frames = ExtResource("2_sf")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 112)
+shape = SubResource("RectangleShape2D_body")
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("3_health")
+max_health = 30
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("4_hurtbox")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(0, 110)
+shape = SubResource("RectangleShape2D_hurt")
+
+[node name="AttackHitbox" type="Area2D" parent="."]
+position = Vector2(55, 100)
+collision_layer = 8
+collision_mask = 16
+script = ExtResource("5_hitbox")
+base_damage = 12
+knockback_force = 320.0
+start_enabled = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox"]
+shape = SubResource("RectangleShape2D_attack")
+
+[node name="EnemyHealthBar" parent="." instance=ExtResource("6_bar")]
+position = Vector2(0, -25)

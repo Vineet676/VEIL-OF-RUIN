@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/systems/safe_landing.gd" id="1_safe"]
+
+[sub_resource type="RectangleShape2D" id="Rect_safe"]
+size = Vector2(200, 60)
+
+[node name="SafeLanding" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_safe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("Rect_safe")
